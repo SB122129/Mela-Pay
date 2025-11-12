@@ -1,0 +1,194 @@
+/* Mela Chain Theme Colors */
+:root {
+  --mela-primary: #7C3AED;
+  --mela-primary-dark: #6b21a8;
+  --mela-primary-light: #a855f7;
+  --mela-secondary: #059669;
+  --mela-secondary-dark: #047857;
+  --mela-secondary-light: #10b981;
+  --mela-accent: #f59e0b;
+  --mela-background: #ffffff;
+  --mela-surface: #f9fafb;
+  --mela-text: #1f2937;
+  --mela-text-secondary: #6b7280;
+}
+
+/* Mela Chain specific components */
+.mela-gradient {
+  background: linear-gradient(135deg, var(--mela-primary) 0%, var(--mela-secondary) 100%);
+}
+
+.mela-gradient-text {
+  background: linear-gradient(135deg, var(--mela-primary) 0%, var(--mela-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.mela-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.mela-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.mela-button {
+  background: linear-gradient(135deg, var(--mela-primary) 0%, var(--mela-primary-dark) 100%);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.mela-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.3);
+}
+
+.mela-button:active {
+  transform: translateY(0);
+}
+
+.mela-button-secondary {
+  background: linear-gradient(135deg, var(--mela-secondary) 0%, var(--mela-secondary-dark) 100%);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.mela-button-outline {
+  background: transparent;
+  color: var(--mela-primary);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: 2px solid var(--mela-primary);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.mela-button-outline:hover {
+  background: var(--mela-primary);
+  color: white;
+}
+
+.mela-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.mela-badge-primary {
+  background: rgba(124, 58, 237, 0.1);
+  color: var(--mela-primary);
+}
+
+.mela-badge-secondary {
+  background: rgba(5, 150, 105, 0.1);
+  color: var(--mela-secondary);
+}
+
+.mela-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.mela-input:focus {
+  outline: none;
+  border-color: var(--mela-primary);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.mela-hero {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(5, 150, 105, 0.05) 100%);
+  padding: 80px 0;
+}
+
+.mela-section {
+  padding: 60px 0;
+}
+
+/* Loading states */
+.mela-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Payment flow specific */
+.payment-card {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.qr-container {
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  border: 2px solid var(--mela-primary);
+}
+
+/* Admin panel */
+.admin-sidebar {
+  background: linear-gradient(180deg, var(--mela-primary) 0%, var(--mela-primary-dark) 100%);
+  color: white;
+}
+
+.admin-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card {
+  background: linear-gradient(135deg, var(--mela-primary) 0%, var(--mela-primary-dark) 100%);
+  color: white;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .mela-hero {
+    padding: 40px 0;
+  }
+  
+  .mela-section {
+    padding: 40px 0;
+  }
+  
+  .payment-card {
+    padding: 20px;
+  }
+}
