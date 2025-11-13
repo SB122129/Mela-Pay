@@ -47,7 +47,11 @@ const seedDatabase = async () => {
     // Sync courses from EdX
     console.log('📚 Syncing courses from EdX...');
     const syncResult = await edxService.syncCourses(20);
-    console.log(`✅ Synced ${syncResult.synced} courses`);
+    if (syncResult.isMock) {
+      console.log(`✅ Synced ${syncResult.synced} courses (mock EdX data)`);
+    } else {
+      console.log(`✅ Synced ${syncResult.synced} courses from EdX`);
+    }
 
     // Add some additional mock courses if needed
     const courseCount = await Course.countDocuments();

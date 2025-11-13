@@ -19,11 +19,29 @@ class EdXService {
         timeout: 10000
       });
 
-      return response.data;
+      return {
+        ...response.data,
+        source: 'edx'
+      };
     } catch (error) {
       console.error('Error fetching from EdX API:', error.message);
-      // Return mock data if API fails
-      return this.getMockCourses();
+
+      const useMockData =
+        process.env.USE_EDX_MOCK === 'true' ||
+        process.env.NODE_ENV !== 'production';
+
+      if (!useMockData) {
+        throw error;
+      }
+
+      const mockData = this.getMockCourses();
+
+      return {
+        ...mockData,
+        source: 'mock',
+        error: error.message,
+        status: error.response?.status
+      };
     }
   }
 
@@ -180,14 +198,26 @@ class EdXService {
     try {
       console.log('🔄 Starting EdX course sync...');
       const edxData = await this.fetchCoursesFromEdX(limit);
-      
+      const isMock = edxData.source === 'mock';
+
       if (!edxData.results || edxData.results.length === 0) {
-        console.log('⚠️ No courses found from EdX API');
-        return { synced: 0, total: 0 };
+        if (isMock) {
+          console.log('⚠️ No courses available from mock EdX data');
+        } else {
+          console.log('⚠️ No courses found from EdX API');
+        }
+        return {
+          synced: 0,
+          total: 0,
+          isMock,
+          source: edxData.source,
+          error: edxData.error,
+          status: edxData.status
+        };
       }
 
       let syncedCount = 0;
-      
+
       for (const edxCourse of edxData.results) {
         try {
           const courseData = this.transformCourse(edxCourse);
@@ -204,8 +234,20 @@ class EdXService {
         }
       }
 
-      console.log(`✅ Synced ${syncedCount} courses from EdX`);
-      return { synced: syncedCount, total: edxData.count };
+      if (isMock) {
+        console.log(`✅ Synced ${syncedCount} courses (mock EdX data)`);
+      } else {
+        console.log(`✅ Synced ${syncedCount} courses from EdX`);
+      }
+
+      return {
+        synced: syncedCount,
+        total: edxData.count,
+        isMock,
+        source: edxData.source,
+        error: edxData.error,
+        status: edxData.status
+      };
     } catch (error) {
       console.error('Error in syncCourses:', error.message);
       throw error;

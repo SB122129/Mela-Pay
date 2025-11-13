@@ -111,10 +111,13 @@ export const syncCourses = asyncHandler(async (req, res) => {
   const { limit = 50 } = req.query;
   
   const result = await edxService.syncCourses(parseInt(limit));
+  const message = result.isMock
+    ? 'Courses synced successfully (mock EdX data)'
+    : 'Courses synced successfully from EdX';
 
   res.json({
     success: true,
-    message: 'Courses synced successfully',
+    message,
     data: result
   });
 });
