@@ -130,7 +130,7 @@ export default function AdminPage() {
                 </Button>
               </form>
 
-              {/* Demo Credentials */}
+              {/* Demo Credentials 
               <div className="mt-6 p-4 bg-blue-50 rounded-lg">
                 <p className="text-sm text-blue-800 mb-2">
                   <strong>Demo Credentials:</strong>
@@ -140,6 +140,7 @@ export default function AdminPage() {
                   Password: admin123
                 </p>
               </div>
+              */}
             </div>
           </div>
         </div>

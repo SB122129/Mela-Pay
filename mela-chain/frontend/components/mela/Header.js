@@ -39,7 +39,7 @@ export default function Header() {
                 Admin
               </Link>
             )}
-          </div>
+          
 
           {/* Actions */}
           <div className="flex items-center space-x-4">
@@ -58,7 +58,7 @@ export default function Header() {
                 href="/admin"
                 className="text-sm text-gray-700 hover:text-primary-600 transition-colors"
               >
-                Admin Login
+               User Login
               </Link>
             )}
             
@@ -73,7 +73,14 @@ export default function Header() {
                 </span>
               )}
             </Link>
-          </div>
+            </div>
+          
+
+              
+
+              
+
+              </div>
         </div>
       </nav>
     </header>
