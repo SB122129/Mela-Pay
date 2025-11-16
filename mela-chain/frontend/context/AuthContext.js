@@ -57,6 +57,26 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const setUserFromStorage = () => {
+    const token = localStorage.getItem('token');
+    const savedUser = localStorage.getItem('user');
+    
+    if (token && savedUser) {
+      try {
+        setUser(JSON.parse(savedUser));
+      } catch (error) {
+        console.error('Error loading user:', error);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+      }
+    }
+  };
+
+  const updateUser = (userData) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+  };
+
   const isAdmin = () => {
     return user?.role === 'admin';
   };
@@ -68,6 +88,8 @@ export const AuthProvider = ({ children }) => {
     logout,
     isAdmin,
     isAuthenticated: !!user,
+    setUserFromStorage,
+    updateUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

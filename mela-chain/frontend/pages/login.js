@@ -3,12 +3,14 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Layout from '../components/layout/Layout';
 import Button from '../components/ui/Button';
+import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 export default function LoginPage() {
   const router = useRouter();
+  const { setUserFromStorage } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -34,6 +36,9 @@ export default function LoginPage() {
       // Store token and user data
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
+
+      // Update AuthContext immediately
+      setUserFromStorage();
 
       // Redirect based on role
       if (user.role === 'admin') {
@@ -61,16 +66,16 @@ export default function LoginPage() {
 
   return (
     <Layout title="Login - Mela Chain">
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50 py-12 px-4">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-900 dark:to-gray-800 py-12 px-4">
         <div className="max-w-md w-full">
-          <div className="bg-white rounded-xl shadow-2xl p-8">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8">
             {/* Logo */}
             <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-primary-600 to-secondary-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-400 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                 <span className="text-white font-bold text-2xl">M</span>
               </div>
               <h1 className="text-3xl font-bold gradient-text mb-2">Welcome Back</h1>
-              <p className="text-gray-600">Sign in to continue learning</p>
+              <p className="text-gray-600 dark:text-gray-400">Sign in to continue learning</p>
             </div>
 
             {/* Google Login */}
@@ -103,23 +108,23 @@ export default function LoginPage() {
 
             <div className="relative mb-6">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
+                <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Or sign in with email</span>
+                <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">Or sign in with email</span>
               </div>
             </div>
 
             {/* Login Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
               {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
+                <div className="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg">
                   {error}
                 </div>
               )}
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Email Address
                 </label>
                 <input
@@ -135,7 +140,7 @@ export default function LoginPage() {
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Password
                 </label>
                 <input
@@ -169,9 +174,9 @@ export default function LoginPage() {
 
             {/* Sign Up Link */}
             <div className="mt-6 text-center">
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 Don't have an account?{' '}
-                <Link href="/signup" className="text-primary-600 hover:text-primary-700 font-medium">
+                <Link href="/signup" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium">
                   Sign Up
                 </Link>
               </p>

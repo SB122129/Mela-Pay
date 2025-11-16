@@ -8,11 +8,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-secondary-600 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-400 rounded-lg flex items-center justify-center shadow-lg">
                 <span className="text-white font-bold text-xl">M</span>
               </div>
               <div>
-                <h2 className="text-xl font-bold">Mela Chain</h2>
+                <h2 className="text-xl font-bold">Mela Pay</h2>
                 <p className="text-sm text-gray-400">Learn Smarter, Pay with Crypto</p>
               </div>
             </div>

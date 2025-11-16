@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../components/layout/Layout';
+import { useAuth } from '../../context/AuthContext';
 
 export default function AuthCallback() {
   const router = useRouter();
+  const { setUserFromStorage } = useAuth();
 
   useEffect(() => {
     const { token } = router.query;
@@ -22,6 +24,8 @@ export default function AuthCallback() {
         .then(data => {
           if (data.success) {
             localStorage.setItem('user', JSON.stringify(data.data));
+            // Update AuthContext immediately
+            setUserFromStorage();
             router.push('/my-courses');
           } else {
             router.push('/login');

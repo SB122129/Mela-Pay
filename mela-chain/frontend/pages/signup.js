@@ -3,12 +3,14 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Layout from '../components/layout/Layout';
 import Button from '../components/ui/Button';
+import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 export default function SignupPage() {
   const router = useRouter();
+  const { setUserFromStorage } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -69,6 +71,9 @@ export default function SignupPage() {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
 
+      // Update AuthContext immediately
+      setUserFromStorage();
+
       // Redirect to courses page
       router.push('/courses');
     } catch (error) {
@@ -94,16 +99,16 @@ export default function SignupPage() {
 
   return (
     <Layout title="Sign Up - Mela Chain">
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50 py-12 px-4">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-900 dark:to-gray-800 py-12 px-4">
         <div className="max-w-md w-full">
-          <div className="bg-white rounded-xl shadow-2xl p-8">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8">
             {/* Logo */}
             <div className="text-center mb-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-primary-600 to-secondary-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary-600 to-primary-400 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                 <span className="text-white font-bold text-2xl">M</span>
               </div>
-              <h1 className="text-3xl font-bold gradient-text mb-2">Join Mela Chain</h1>
-              <p className="text-gray-600">Learn Smarter, Pay with Crypto</p>
+              <h1 className="text-3xl font-bold gradient-text mb-2">Join Mela Pay</h1>
+              <p className="text-gray-600 dark:text-gray-400">Learn Smarter, Pay with Crypto</p>
             </div>
 
             {/* Google Sign Up */}
@@ -136,23 +141,23 @@ export default function SignupPage() {
 
             <div className="relative mb-6">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
+                <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Or sign up with email</span>
+                <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">Or sign up with email</span>
               </div>
             </div>
 
             {/* Sign Up Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
               {serverError && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                <div className="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg text-sm">
                   {serverError}
                 </div>
               )}
 
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Full Name *
                 </label>
                 <input
@@ -165,12 +170,12 @@ export default function SignupPage() {
                   placeholder="John Doe"
                 />
                 {errors.name && (
-                  <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name}</p>
                 )}
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Email Address *
                 </label>
                 <input
@@ -183,12 +188,12 @@ export default function SignupPage() {
                   placeholder="you@example.com"
                 />
                 {errors.email && (
-                  <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email}</p>
                 )}
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Password *
                 </label>
                 <input
@@ -201,12 +206,12 @@ export default function SignupPage() {
                   placeholder="••••••••"
                 />
                 {errors.password && (
-                  <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.password}</p>
                 )}
               </div>
 
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Confirm Password *
                 </label>
                 <input
@@ -219,7 +224,7 @@ export default function SignupPage() {
                   placeholder="••••••••"
                 />
                 {errors.confirmPassword && (
-                  <p className="mt-1 text-sm text-red-600">{errors.confirmPassword}</p>
+                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.confirmPassword}</p>
                 )}
               </div>
 
@@ -242,9 +247,9 @@ export default function SignupPage() {
 
             {/* Login Link */}
             <div className="mt-6 text-center">
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
                 Already have an account?{' '}
-                <Link href="/login" className="text-primary-600 hover:text-primary-700 font-medium">
+                <Link href="/login" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium">
                   Sign In
                 </Link>
               </p>

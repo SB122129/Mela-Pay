@@ -32,9 +32,18 @@
   transition: all 0.3s ease;
 }
 
+.dark .mela-card {
+  background: #27272a;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
 .mela-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.dark .mela-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
 .mela-button {
@@ -134,6 +143,11 @@
   animation: loading 1.5s ease-in-out infinite;
 }
 
+.dark .mela-skeleton {
+  background: linear-gradient(90deg, #3f3f46 25%, #52525b 50%, #3f3f46 75%);
+  background-size: 200% 100%;
+}
+
 @keyframes loading {
   0% {
     background-position: 200% 0;
@@ -151,11 +165,20 @@
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
+.dark .payment-card {
+  background: #27272a;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
 .qr-container {
   padding: 24px;
   background: white;
   border-radius: 12px;
   border: 2px solid var(--mela-primary);
+}
+
+.dark .qr-container {
+  background: #3f3f46;
 }
 
 /* Admin panel */
@@ -169,6 +192,11 @@
   border-radius: 12px;
   padding: 24px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.dark .admin-card {
+  background: #27272a;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
 }
 
 .stat-card {

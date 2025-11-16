@@ -50,19 +50,19 @@ export default function CourseCard({ course }) {
       {/* Course Info */}
       <div className="p-5">
         {/* Institution */}
-        <p className="text-sm text-secondary-600 font-medium mb-2">
+        <p className="text-sm text-secondary-600 dark:text-secondary-400 font-medium mb-2">
           {course.institution}
         </p>
 
         {/* Title */}
         <Link href={`/course/${course._id}`}>
-          <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary-600 transition-colors">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 line-clamp-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
             {course.title}
           </h3>
         </Link>
 
         {/* Description */}
-        <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
           {course.description}
         </p>
 
@@ -72,7 +72,7 @@ export default function CourseCard({ course }) {
             {course.subjects.slice(0, 2).map((subject, index) => (
               <span
                 key={index}
-                className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded"
+                className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded"
               >
                 {subject}
               </span>
@@ -81,12 +81,12 @@ export default function CourseCard({ course }) {
         )}
 
         {/* Price and Action */}
-        <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+        <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
           <div>
-            <p className="text-2xl font-bold text-gray-900">
+            <p className="text-2xl font-bold text-gray-900 dark:text-white">
               {formatPrice(course.price)}
             </p>
-            <p className="text-sm text-gray-500">{formatDOT(course.priceInDOT)}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">{formatDOT(course.priceInDOT)}</p>
           </div>
           
           <Button

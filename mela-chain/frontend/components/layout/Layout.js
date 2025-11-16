@@ -12,7 +12,7 @@ export default function Layout({ children, title = 'Mela Chain', description = '
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-      <div className="min-h-screen flex flex-col bg-gray-50">
+      <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
         <Header />
         <main className="flex-1">
           {children}

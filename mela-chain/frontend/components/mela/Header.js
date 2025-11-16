@@ -1,37 +1,38 @@
 import Link from 'next/link';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
+import DarkModeToggle from '../ui/DarkModeToggle';
 
 export default function Header() {
   const { cartCount } = useCart();
   const { user, logout, isAuthenticated } = useAuth();
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-40">
+    <header className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-40 transition-colors">
       <nav className="container-custom py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-secondary-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-400 rounded-lg flex items-center justify-center shadow-lg">
               <span className="text-white font-bold text-xl">M</span>
             </div>
             <div>
-              <h1 className="text-2xl font-bold gradient-text">Mela Chain</h1>
-              <p className="text-xs text-gray-500">Learn Smarter, Pay with Crypto</p>
+              <h1 className="text-2xl font-bold gradient-text">Mela Pay</h1>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Learn Smarter, Pay with Crypto</p>
             </div>
           </Link>
 
           {/* Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/courses" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
+            <Link href="/courses" className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
               Courses
             </Link>
             {isAuthenticated && (
-              <Link href="/my-courses" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
+              <Link href="/my-courses" className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
                 My Courses
               </Link>
             )}
-            <Link href="/cart" className="text-gray-700 hover:text-primary-600 transition-colors font-medium relative">
+            <Link href="/cart" className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium relative">
               Cart
               {cartCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-primary-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -40,7 +41,7 @@ export default function Header() {
               )}
             </Link>
             {isAuthenticated && user?.role === 'admin' && (
-              <Link href="/admin" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
+              <Link href="/admin" className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium">
                 Admin
               </Link>
             )}
@@ -48,12 +49,13 @@ export default function Header() {
 
           {/* Actions */}
           <div className="flex items-center space-x-4">
+            <DarkModeToggle />
             {isAuthenticated ? (
               <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-600">Hi, {user?.name}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">Hi, {user?.name}</span>
                 <button
                   onClick={logout}
-                  className="text-sm text-gray-700 hover:text-primary-600 transition-colors font-medium"
+                  className="text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium"
                 >
                   Logout
                 </button>
@@ -62,7 +64,7 @@ export default function Header() {
               <div className="flex items-center space-x-4">
                 <Link
                   href="/login"
-                  className="text-sm text-gray-700 hover:text-primary-600 transition-colors font-medium"
+                  className="text-sm text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors font-medium"
                 >
                   Login
                 </Link>

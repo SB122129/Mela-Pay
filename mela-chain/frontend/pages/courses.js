@@ -57,14 +57,14 @@ export default function CoursesPage() {
       <div className="container-custom py-12">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-4">Browse Courses</h1>
-          <p className="text-xl text-gray-600">
+          <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Browse Courses</h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400">
             Discover thousands of courses from top universities
           </p>
         </div>
 
         {/* Search and Filters */}
-        <div className="bg-white rounded-xl shadow-md p-6 mb-8">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Search */}
             <div className="lg:col-span-2">
@@ -133,7 +133,7 @@ export default function CoursesPage() {
                 >
                   Previous
                 </Button>
-                <span className="text-gray-600">
+                <span className="text-gray-600 dark:text-gray-400">
                   Page {page} of {totalPages}
                 </span>
                 <Button
@@ -161,8 +161,8 @@ export default function CoursesPage() {
                 d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <h3 className="text-2xl font-bold text-gray-700 mb-2">No courses found</h3>
-            <p className="text-gray-500">Try adjusting your search or filters</p>
+            <h3 className="text-2xl font-bold text-gray-700 dark:text-gray-300 mb-2">No courses found</h3>
+            <p className="text-gray-500 dark:text-gray-400">Try adjusting your search or filters</p>
           </div>
         )}
       </div>

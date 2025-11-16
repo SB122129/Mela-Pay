@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../components/layout/Layout';
 import Button from '../components/ui/Button';
+import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import { formatPrice, formatDOT } from '../lib/utils';
 
@@ -9,24 +10,23 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 export default function MyCoursesPage() {
   const router = useRouter();
+  const { user: authUser, logout, isAuthenticated } = useAuth();
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
   const [error, setError] = useState('');
 
   useEffect(() => {
     // Check if user is logged in
-    const token = localStorage.getItem('token');
-    const userData = localStorage.getItem('user');
-
-    if (!token || !userData) {
+    if (!isAuthenticated) {
       router.push('/login');
       return;
     }
 
-    setUser(JSON.parse(userData));
-    fetchPurchasedCourses(token);
-  }, []);
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetchPurchasedCourses(token);
+    }
+  }, [isAuthenticated]);
 
   const fetchPurchasedCourses = async (token) => {
     try {
@@ -40,8 +40,7 @@ export default function MyCoursesPage() {
     } catch (err) {
       console.error('Error fetching courses:', err);
       if (err.response?.status === 401) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        logout();
         router.push('/login');
       } else {
         setError('Failed to load your courses');
@@ -52,8 +51,7 @@ export default function MyCoursesPage() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    logout();
     router.push('/');
   };
 
@@ -78,7 +76,7 @@ export default function MyCoursesPage() {
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-3xl font-bold text-gray-900">My Courses</h1>
-                <p className="text-gray-600 mt-1">Welcome back, {user?.name}!</p>
+                <p className="text-gray-600 mt-1">Welcome back, {authUser?.name}!</p>
               </div>
               <div className="flex items-center space-x-4">
                 <Button variant="outline" onClick={() => router.push('/courses')}>
