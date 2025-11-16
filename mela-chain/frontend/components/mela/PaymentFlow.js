@@ -2,13 +2,17 @@ import { useState, useEffect } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { paymentsAPI } from '../../lib/api';
 import { formatDOT, formatPrice, copyToClipboard, getPaymentStatusColor, getPaymentStatusText } from '../../lib/utils';
+import { usePolkadot } from '../../context/PolkadotContext';
 import Button from '../ui/Button';
 
 export default function PaymentFlow({ payment, onComplete }) {
+  const { selectedAccount, getBalance, isConnected } = usePolkadot();
   const [status, setStatus] = useState(payment.status);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [timeLeft, setTimeLeft] = useState(null);
+  const [balance, setBalance] = useState(null);
+  const [balanceLoading, setBalanceLoading] = useState(false);
 
   // Poll payment status
   useEffect(() => {
@@ -35,6 +39,27 @@ export default function PaymentFlow({ payment, onComplete }) {
 
     return () => clearInterval(interval);
   }, [payment, status, onComplete]);
+
+  // Fetch balance when wallet is connected
+  useEffect(() => {
+    const fetchBalance = async () => {
+      if (selectedAccount && selectedAccount.address && isConnected) {
+        setBalanceLoading(true);
+        try {
+          const accountBalance = await getBalance(selectedAccount.address);
+          // Convert from Planck to DOT (1 DOT = 10^10 Planck)
+          const dotBalance = parseFloat(accountBalance) / Math.pow(10, 10);
+          setBalance(dotBalance);
+        } catch (error) {
+          console.error('Error fetching balance:', error);
+          setBalance(null);
+        } finally {
+          setBalanceLoading(false);
+        }
+      }
+    };
+    fetchBalance();
+  }, [selectedAccount, isConnected, getBalance]);
 
   // Calculate time left
   useEffect(() => {
@@ -167,6 +192,29 @@ export default function PaymentFlow({ payment, onComplete }) {
               </div>
             </div>
           </div>
+
+          {/* Balance Warning */}
+          {isConnected && selectedAccount && balance !== null && balance < payment.totalAmountDOT && (
+            <div className="mt-6 p-4 bg-red-50 rounded-lg border border-red-200">
+              <div className="flex items-start">
+                <svg className="w-6 h-6 text-red-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <div>
+                  <h4 className="font-semibold text-red-900 mb-1">⚠️ Insufficient Funds</h4>
+                  <p className="text-sm text-red-800 mb-2">
+                    Your wallet balance ({formatDOT(balance)}) is less than the required amount ({formatDOT(payment.totalAmountDOT)}).
+                  </p>
+                  <p className="text-sm text-red-800 font-medium">
+                    You need {formatDOT(payment.totalAmountDOT - balance)} more DOT to complete this payment.
+                  </p>
+                  <p className="text-xs text-red-700 mt-2">
+                    Please add funds to your wallet or use a different account with sufficient balance.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Instructions */}
           <div className="mt-6 p-4 bg-blue-50 rounded-lg">

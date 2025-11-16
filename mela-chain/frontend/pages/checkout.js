@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../components/layout/Layout';
 import Button from '../components/ui/Button';
@@ -19,11 +19,34 @@ export default function CheckoutPage() {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [walletAddress, setWalletAddress] = useState(null);
+  const [balance, setBalance] = useState(null);
+  const [balanceLoading, setBalanceLoading] = useState(false);
+  const [balanceError, setBalanceError] = useState(null);
+  const [notification, setNotification] = useState(null);
 
   const total = getCartTotal();
+  const { getBalance } = usePolkadot();
 
-  const handleAccountSelect = (account) => {
+  const handleAccountSelect = async (account) => {
     setWalletAddress(account.address);
+    setBalanceError(null);
+    
+    // Fetch balance for selected account
+    if (account && account.address) {
+      setBalanceLoading(true);
+      try {
+        const accountBalance = await getBalance(account.address);
+        // Convert from Planck to DOT (1 DOT = 10^10 Planck)
+        const dotBalance = parseFloat(accountBalance) / Math.pow(10, 10);
+        setBalance(dotBalance);
+      } catch (error) {
+        console.error('Error fetching balance:', error);
+        setBalanceError('Unable to fetch balance');
+        setBalance(null);
+      } finally {
+        setBalanceLoading(false);
+      }
+    }
   };
 
   const validateForm = () => {
@@ -51,9 +74,39 @@ export default function CheckoutPage() {
     }
 
     if (cart.length === 0) {
-      alert('Your cart is empty');
+      setNotification({
+        type: 'error',
+        title: 'Cart is Empty',
+        message: 'Please add courses to your cart before checking out.'
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
+
+    // Check if wallet is connected and balance is sufficient
+    if (!isConnected || !selectedAccount) {
+      setNotification({
+        type: 'error',
+        title: 'Wallet Not Connected',
+        message: 'Please connect your Polkadot wallet to continue with the payment.'
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    if (balance !== null && balance < total.dot) {
+      setNotification({
+        type: 'error',
+        title: 'Insufficient Funds',
+        message: `You need ${formatDOT(total.dot)} but only have ${formatDOT(balance)} in your wallet. Please add ${formatDOT(total.dot - balance)} more DOT to complete this purchase.`,
+        action: 'Add funds to your Polkadot wallet and try again.'
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // Clear any previous notifications
+    setNotification(null);
 
     setLoading(true);
 
@@ -73,7 +126,12 @@ export default function CheckoutPage() {
       router.push(`/payment/${payment.paymentId}`);
     } catch (error) {
       console.error('Error creating payment:', error);
-      alert(error.response?.data?.message || 'Failed to create payment. Please try again.');
+      setNotification({
+        type: 'error',
+        title: 'Payment Creation Failed',
+        message: error.response?.data?.message || 'Failed to create payment. Please try again.',
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } finally {
       setLoading(false);
     }
@@ -96,6 +154,58 @@ export default function CheckoutPage() {
   return (
     <Layout title="Checkout - Mela Chain">
       <div className="container-custom py-12">
+        {/* Notification Card */}
+        {notification && (
+          <div className={`mb-8 rounded-xl shadow-lg overflow-hidden ${
+            notification.type === 'error' ? 'bg-red-50 border-2 border-red-200' : 'bg-blue-50 border-2 border-blue-200'
+          }`}>
+            <div className="p-6">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  {notification.type === 'error' ? (
+                    <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                  ) : (
+                    <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  )}
+                </div>
+                <div className="ml-4 flex-1">
+                  <h3 className={`text-lg font-bold mb-1 ${
+                    notification.type === 'error' ? 'text-red-900' : 'text-blue-900'
+                  }`}>
+                    {notification.title}
+                  </h3>
+                  <p className={`text-sm mb-2 ${
+                    notification.type === 'error' ? 'text-red-800' : 'text-blue-800'
+                  }`}>
+                    {notification.message}
+                  </p>
+                  {notification.action && (
+                    <p className={`text-xs font-medium ${
+                      notification.type === 'error' ? 'text-red-700' : 'text-blue-700'
+                    }`}>
+                      💡 {notification.action}
+                    </p>
+                  )}
+                </div>
+                <button
+                  onClick={() => setNotification(null)}
+                  className={`flex-shrink-0 ml-4 p-1 rounded-lg hover:bg-white/50 transition-colors ${
+                    notification.type === 'error' ? 'text-red-600' : 'text-blue-600'
+                  }`}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         <h1 className="text-4xl font-bold mb-8">Checkout</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -210,6 +320,35 @@ export default function CheckoutPage() {
             {/* Polkadot Wallet */}
             <div className="mb-6">
               <PolkadotWallet onAccountSelect={handleAccountSelect} />
+              
+              {/* Balance Display */}
+              {isConnected && selectedAccount && (
+                <div className="mt-4 p-4 bg-white rounded-lg border border-gray-200">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium text-gray-700">Wallet Balance</span>
+                    {balanceLoading && (
+                      <div className="spinner w-4 h-4 border-2"></div>
+                    )}
+                  </div>
+                  {balanceError ? (
+                    <p className="text-sm text-red-600">{balanceError}</p>
+                  ) : balance !== null ? (
+                    <div>
+                      <p className="text-xl font-bold text-gray-900">{formatDOT(balance)}</p>
+                      {balance < total.dot && (
+                        <div className="mt-2 p-2 bg-red-50 rounded border border-red-200">
+                          <p className="text-xs text-red-800 font-medium flex items-center">
+                            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                            Insufficient funds! Need {formatDOT(total.dot - balance)} more
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  ) : null}
+                </div>
+              )}
             </div>
 
             <div className="bg-white rounded-xl shadow-md p-6 sticky top-24">
