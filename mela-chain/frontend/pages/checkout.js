@@ -146,8 +146,15 @@ export default function CheckoutPage() {
     }
   };
 
+  // Redirect to cart if empty - must be in useEffect for SSR compatibility
+  useEffect(() => {
+    if (cart.length === 0) {
+      router.push('/cart');
+    }
+  }, [cart.length, router]);
+
+  // Don't render if cart is empty
   if (cart.length === 0) {
-    router.push('/cart');
     return null;
   }
 
