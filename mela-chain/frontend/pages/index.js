@@ -141,7 +141,7 @@ export default function Home() {
       <section className="mela-section">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Why Mela Chain?</h2>
+            <h2 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Why Mela Pay?</h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
               The best way to invest in your education
             </p>
@@ -177,7 +177,7 @@ export default function Home() {
         <div className="container-custom text-center">
           <h2 className="text-4xl font-bold mb-4">Ready to Start Learning?</h2>
           <p className="text-xl mb-8 opacity-90">
-            Join thousands of students already learning with Mela Chain
+            Join thousands of students already learning with Mela Pay
           </p>
           <Link href="/courses">
             <Button size="lg" className=" text-primary-600 hover:bg-gray-100">
