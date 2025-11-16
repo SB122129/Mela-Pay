@@ -43,8 +43,8 @@ export default function CartPage() {
                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
               />
             </svg>
-            <h1 className="text-3xl font-bold mb-4">Your cart is empty</h1>
-            <p className="text-gray-600 mb-8">
+            <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Your cart is empty</h1>
+            <p className="text-gray-600 dark:text-gray-400 mb-8">
               Start adding courses to your cart to begin your learning journey
             </p>
             <Link href="/courses">
@@ -59,7 +59,7 @@ export default function CartPage() {
   return (
     <Layout title="Shopping Cart - Mela Chain">
       <div className="container-custom py-12">
-        <h1 className="text-4xl font-bold mb-8">Shopping Cart</h1>
+        <h1 className="text-4xl font-bold mb-8 text-gray-900 dark:text-white">Shopping Cart</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
@@ -67,7 +67,7 @@ export default function CartPage() {
             {cart.map((course) => (
               <div
                 key={course._id}
-                className={`bg-white rounded-xl shadow-md p-6 transition-all ${
+                className={`bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 transition-all ${
                   removing === course._id ? 'opacity-50' : ''
                 }`}
               >
@@ -104,21 +104,21 @@ export default function CartPage() {
 
                   {/* Course Info */}
                   <div className="flex-1">
-                    <p className="text-sm text-secondary-600 font-medium mb-1">
+                    <p className="text-sm text-secondary-600 dark:text-secondary-400 font-medium mb-1">
                       {course.institution}
                     </p>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                       {course.title}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
                       {course.description}
                     </p>
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-2xl font-bold text-gray-900">
+                        <p className="text-2xl font-bold text-gray-900 dark:text-white">
                           {formatPrice(course.price)}
                         </p>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
                           {formatDOT(course.priceInDOT)}
                         </p>
                       </div>
@@ -147,8 +147,8 @@ export default function CartPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-md p-6 sticky top-24">
-              <h2 className="text-2xl font-bold mb-6">Order Summary</h2>
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 sticky top-24">
+              <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Order Summary</h2>
 
               <div className="space-y-4 mb-6">
                 <div className="flex justify-between text-gray-600">
@@ -159,12 +159,12 @@ export default function CartPage() {
                   <span>Processing Fee</span>
                   <span>$0.00</span>
                 </div>
-                <div className="border-t border-gray-200 pt-4">
-                  <div className="flex justify-between text-xl font-bold mb-2">
+                <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+                  <div className="flex justify-between text-xl font-bold mb-2 text-gray-900 dark:text-white">
                     <span>Total (USD)</span>
                     <span>{formatPrice(total.usd)}</span>
                   </div>
-                  <div className="flex justify-between text-lg text-primary-600 font-semibold">
+                  <div className="flex justify-between text-lg text-primary-600 dark:text-primary-400 font-semibold">
                     <span>Total (DOT)</span>
                     <span>{formatDOT(total.dot)}</span>
                   </div>
@@ -186,11 +186,11 @@ export default function CartPage() {
               </Link>
 
               {/* Payment Info */}
-              <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                <h4 className="font-semibold text-blue-900 mb-2">
+              <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+                <h4 className="font-semibold text-blue-900 dark:text-blue-300 mb-2">
                   💳 Payment Method
                 </h4>
-                <p className="text-sm text-blue-800">
+                <p className="text-sm text-blue-800 dark:text-blue-400">
                   Pay securely with Polkadot (DOT) cryptocurrency
                 </p>
               </div>
