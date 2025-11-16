@@ -4,6 +4,7 @@ import Layout from '../components/layout/Layout';
 import Button from '../components/ui/Button';
 import { useCart } from '../context/CartContext';
 import { usePolkadot } from '../context/PolkadotContext';
+import { useAuth } from '../context/AuthContext';
 import PolkadotWallet from '../components/mela/PolkadotWallet';
 import { paymentsAPI } from '../lib/api';
 import { formatPrice, formatDOT, isValidEmail } from '../lib/utils';
@@ -12,6 +13,7 @@ export default function CheckoutPage() {
   const router = useRouter();
   const { cart, getCartTotal, clearCart } = useCart();
   const { selectedAccount, isConnected } = usePolkadot();
+  const { isAuthenticated } = useAuth();
   const [formData, setFormData] = useState({
     userName: '',
     userEmail: '',
@@ -152,6 +154,13 @@ export default function CheckoutPage() {
       router.push('/cart');
     }
   }, [cart.length, router]);
+
+  // Redirect to home if user logs out while on checkout page
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push('/');
+    }
+  }, [isAuthenticated, router]);
 
   // Don't render if cart is empty
   if (cart.length === 0) {
