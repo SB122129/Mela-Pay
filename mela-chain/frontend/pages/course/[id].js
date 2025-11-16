@@ -44,9 +44,9 @@ export default function CoursePage() {
       <Layout>
         <div className="container-custom py-12">
           <div className="animate-pulse space-y-8">
-            <div className="h-96 bg-gray-200 rounded-xl"></div>
-            <div className="h-8 bg-gray-200 rounded w-3/4"></div>
-            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+            <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
           </div>
         </div>
       </Layout>
@@ -57,7 +57,7 @@ export default function CoursePage() {
     return (
       <Layout>
         <div className="container-custom py-12 text-center">
-          <h1 className="text-3xl font-bold mb-4">Course Not Found</h1>
+          <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Course Not Found</h1>
           <Link href="/courses">
             <Button>Browse Courses</Button>
           </Link>
@@ -70,13 +70,13 @@ export default function CoursePage() {
 
   return (
     <Layout title={`${course.title} - Mela Chain`} description={course.description}>
-      <div className="bg-gradient-to-br from-primary-50 to-secondary-50 py-12">
+      <div className="bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-900 dark:to-gray-800 py-12">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content */}
             <div className="lg:col-span-2">
               {/* Course Image */}
-              <div className="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden mb-8">
                 <div className="h-96 bg-gradient-to-br from-primary-100 to-secondary-100 relative">
                   {course.imageUrl ? (
                     <img
@@ -103,13 +103,13 @@ export default function CoursePage() {
               </div>
 
               {/* Course Details */}
-              <div className="bg-white rounded-xl shadow-md p-8">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-8">
                 <div className="mb-6">
-                  <p className="text-secondary-600 font-semibold mb-2">{course.institution}</p>
-                  <h1 className="text-4xl font-bold text-gray-900 mb-4">{course.title}</h1>
+                  <p className="text-secondary-600 dark:text-secondary-400 font-semibold mb-2">{course.institution}</p>
+                  <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">{course.title}</h1>
                   
                   {/* Meta Info */}
-                  <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                  <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
                     {course.duration && (
                       <div className="flex items-center">
                         <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -135,19 +135,19 @@ export default function CoursePage() {
 
                 {/* Description */}
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold mb-4">About This Course</h2>
-                  <p className="text-gray-700 leading-relaxed">{course.description}</p>
+                  <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">About This Course</h2>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{course.description}</p>
                 </div>
 
                 {/* Subjects */}
                 {course.subjects && course.subjects.length > 0 && (
                   <div className="mb-8">
-                    <h2 className="text-2xl font-bold mb-4">Topics Covered</h2>
+                    <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Topics Covered</h2>
                     <div className="flex flex-wrap gap-2">
                       {course.subjects.map((subject, index) => (
                         <span
                           key={index}
-                          className="bg-primary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-medium"
+                          className="bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 px-4 py-2 rounded-full text-sm font-medium"
                         >
                           {subject}
                         </span>
@@ -157,16 +157,16 @@ export default function CoursePage() {
                 )}
 
                 {/* EdX Link */}
-                <div className="bg-blue-50 rounded-lg p-6">
-                  <h3 className="font-bold text-blue-900 mb-2">Course Provider</h3>
-                  <p className="text-blue-800 mb-3">
+                <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-6">
+                  <h3 className="font-bold text-blue-900 dark:text-blue-300 mb-2">Course Provider</h3>
+                  <p className="text-blue-800 dark:text-blue-400 mb-3">
                     This course is provided by EdX, a leading online learning platform founded by Harvard and MIT.
                   </p>
                   <a
                     href={course.edxUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"
+                    className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium inline-flex items-center"
                   >
                     View on EdX
                     <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -179,13 +179,13 @@ export default function CoursePage() {
 
             {/* Sidebar */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-xl shadow-md p-6 sticky top-24">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 sticky top-24">
                 {/* Price */}
                 <div className="mb-6">
-                  <p className="text-3xl font-bold text-gray-900 mb-2">
+                  <p className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
                     {formatPrice(course.price)}
                   </p>
-                  <p className="text-xl text-primary-600 font-semibold">
+                  <p className="text-xl text-primary-600 dark:text-primary-400 font-semibold">
                     {formatDOT(course.priceInDOT)}
                   </p>
                 </div>
@@ -225,7 +225,7 @@ export default function CoursePage() {
                 </div>
 
                 {/* Features */}
-                <div className="space-y-3 text-sm text-gray-600">
+                <div className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
                   <div className="flex items-center">
                     <svg className="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />

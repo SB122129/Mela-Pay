@@ -21,7 +21,7 @@ export default function CoursesPage() {
 
   useEffect(() => {
     fetchCourses();
-  }, [page, filters]);
+  }, [page, filters, search]);
 
   const fetchCourses = async () => {
     setLoading(true);
@@ -44,7 +44,6 @@ export default function CoursesPage() {
   const handleSearch = debounce((value) => {
     setSearch(value);
     setPage(1);
-    fetchCourses();
   }, 500);
 
   const handleFilterChange = (key, value) => {

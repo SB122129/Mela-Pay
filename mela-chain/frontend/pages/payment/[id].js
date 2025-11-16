@@ -55,8 +55,8 @@ export default function PaymentPage() {
             <svg className="w-24 h-24 text-red-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <h1 className="text-3xl font-bold mb-4">Payment Not Found</h1>
-            <p className="text-gray-600 mb-8">{error || 'The payment you are looking for does not exist.'}</p>
+            <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Payment Not Found</h1>
+            <p className="text-gray-600 dark:text-gray-400 mb-8">{error || 'The payment you are looking for does not exist.'}</p>
             <button
               onClick={() => router.push('/courses')}
               className="btn-primary"
@@ -74,8 +74,8 @@ export default function PaymentPage() {
       <div className="container-custom py-12">
         <div className="max-w-3xl mx-auto">
           <div className="mb-8">
-            <h1 className="text-4xl font-bold mb-2">Complete Your Payment</h1>
-            <p className="text-gray-600">
+            <h1 className="text-4xl font-bold mb-2 text-gray-900 dark:text-white">Complete Your Payment</h1>
+            <p className="text-gray-600 dark:text-gray-400">
               Follow the instructions below to complete your purchase
             </p>
           </div>

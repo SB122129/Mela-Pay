@@ -22,8 +22,18 @@ export const getCourses = asyncHandler(async (req, res) => {
   // Build query
   const query = { isActive: true };
 
-  if (search) {
-    query.$text = { $search: search };
+  // Only apply search if search term exists and is not empty after trimming
+  const trimmedSearch = search ? search.trim() : '';
+  if (trimmedSearch && trimmedSearch.length > 0) {
+    // Use regex to search in title, description, and institution
+    // Case-insensitive search that matches courses starting with or containing the search term
+    const searchRegex = new RegExp(trimmedSearch, 'i');
+    query.$or = [
+      { title: searchRegex },
+      { description: searchRegex },
+      { institution: searchRegex },
+      { subjects: searchRegex }
+    ];
   }
 
   if (institution) {

@@ -39,9 +39,17 @@ router.get('/courses', verifyToken, getPurchasedCourses);
  * @access  Public
  */
 router.get('/google',
+  (req, res, next) => {
+    // Pass redirect as state parameter
+    const redirect = req.query.redirect;
+    const state = redirect ? Buffer.from(JSON.stringify({ redirect })).toString('base64') : '';
+    req.authInfo = { state };
+    next();
+  },
   passport.authenticate('google', { 
     scope: ['profile', 'email'],
-    session: false
+    session: false,
+    state: true
   })
 );
 

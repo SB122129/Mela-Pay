@@ -174,7 +174,19 @@ export const googleCallback = asyncHandler(async (req, res) => {
   // Generate token
   const token = generateToken(user._id);
 
-  // Redirect to frontend with token
+  // Get redirect from state parameter if present
+  let redirectPath = '';
+  try {
+    const state = req.query.state;
+    if (state) {
+      const decoded = JSON.parse(Buffer.from(state, 'base64').toString());
+      redirectPath = decoded.redirect ? `&redirect=${encodeURIComponent(decoded.redirect)}` : '';
+    }
+  } catch (err) {
+    console.error('Error parsing state:', err);
+  }
+
+  // Redirect to frontend with token and optional redirect
   const frontendUrl = process.env.CLIENT_URL || 'http://localhost:3000';
-  res.redirect(`${frontendUrl}/auth/callback?token=${token}`);
+  res.redirect(`${frontendUrl}/auth/callback?token=${token}${redirectPath}`);
 });

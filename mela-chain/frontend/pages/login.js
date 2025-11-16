@@ -10,6 +10,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 export default function LoginPage() {
   const router = useRouter();
+  const { redirect } = router.query; // Get redirect parameter from URL
   const { setUserFromStorage } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
@@ -40,8 +41,10 @@ export default function LoginPage() {
       // Update AuthContext immediately
       setUserFromStorage();
 
-      // Redirect based on role
-      if (user.role === 'admin') {
+      // Redirect based on redirect parameter or role
+      if (redirect) {
+        router.push(redirect);
+      } else if (user.role === 'admin') {
         router.push('/admin');
       } else {
         router.push('/my-courses');
@@ -61,7 +64,9 @@ export default function LoginPage() {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = `${API_URL}/api/auth/google`;
+    // Include redirect parameter in Google OAuth URL if present
+    const redirectParam = redirect ? `?redirect=${encodeURIComponent(redirect)}` : '';
+    window.location.href = `${API_URL}/api/auth/google${redirectParam}`;
   };
 
   return (
@@ -77,6 +82,15 @@ export default function LoginPage() {
               <h1 className="text-3xl font-bold gradient-text mb-2">Welcome Back</h1>
               <p className="text-gray-600 dark:text-gray-400">Sign in to continue learning</p>
             </div>
+
+            {/* Redirect message */}
+            {redirect && (
+              <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-lg">
+                <p className="text-sm text-blue-800 dark:text-blue-300 text-center">
+                  Please log in to proceed to checkout
+                </p>
+              </div>
+            )}
 
             {/* Google Login */}
             <Button

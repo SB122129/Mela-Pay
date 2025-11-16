@@ -4,11 +4,13 @@ import Link from 'next/link';
 import Layout from '../components/layout/Layout';
 import Button from '../components/ui/Button';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { formatPrice, formatDOT } from '../lib/utils';
 
 export default function CartPage() {
   const router = useRouter();
   const { cart, removeFromCart, clearCart, getCartTotal } = useCart();
+  const { isAuthenticated } = useAuth();
   const [removing, setRemoving] = useState(null);
   
   const total = getCartTotal();
@@ -22,6 +24,13 @@ export default function CartPage() {
 
   const handleCheckout = () => {
     if (cart.length === 0) return;
+    
+    // Redirect to login if user is not authenticated
+    if (!isAuthenticated) {
+      router.push('/login?redirect=/checkout');
+      return;
+    }
+    
     router.push('/checkout');
   };
 

@@ -8,7 +8,7 @@ export default function AuthCallback() {
   const { setUserFromStorage } = useAuth();
 
   useEffect(() => {
-    const { token } = router.query;
+    const { token, redirect } = router.query;
 
     if (token) {
       // Store token
@@ -26,7 +26,15 @@ export default function AuthCallback() {
             localStorage.setItem('user', JSON.stringify(data.data));
             // Update AuthContext immediately
             setUserFromStorage();
-            router.push('/my-courses');
+            
+            // Redirect to specified page or default based on role
+            if (redirect) {
+              router.push(redirect);
+            } else if (data.data.role === 'admin') {
+              router.push('/admin');
+            } else {
+              router.push('/my-courses');
+            }
           } else {
             router.push('/login');
           }
