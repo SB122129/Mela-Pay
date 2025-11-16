@@ -58,7 +58,7 @@ export default function AdminPaymentsPage() {
   }
 
   return (
-    <Layout title="Payments - Admin - Mela Chain">
+    <Layout title="Payments - Admin - Mela Pay">
       <div className="bg-gray-50 min-h-screen">
         {/* Header */}
         <div className="bg-white shadow-sm border-b border-gray-200">

@@ -168,7 +168,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <Layout title="Checkout - Mela Chain">
+    <Layout title="Checkout - Mela Pay">
       <div className="container-custom py-12">
         {/* Notification Card */}
         {notification && (

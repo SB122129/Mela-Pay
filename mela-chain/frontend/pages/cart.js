@@ -36,7 +36,7 @@ export default function CartPage() {
 
   if (cart.length === 0) {
     return (
-      <Layout title="Shopping Cart - Mela Chain">
+      <Layout title="Shopping Cart - Mela Pay">
         <div className="container-custom py-12">
           <div className="max-w-2xl mx-auto text-center">
             <svg
@@ -66,7 +66,7 @@ export default function CartPage() {
   }
 
   return (
-    <Layout title="Shopping Cart - Mela Chain">
+    <Layout title="Shopping Cart - Mela Pay">
       <div className="container-custom py-12">
         <h1 className="text-4xl font-bold mb-8 text-gray-900 dark:text-white">Shopping Cart</h1>
 

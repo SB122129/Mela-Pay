@@ -69,7 +69,7 @@ export default function CoursePage() {
   const inCart = isInCart(course._id);
 
   return (
-    <Layout title={`${course.title} - Mela Chain`} description={course.description}>
+    <Layout title={`${course.title} - Mela Pay`} description={course.description}>
       <div className="bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-900 dark:to-gray-800 py-12">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

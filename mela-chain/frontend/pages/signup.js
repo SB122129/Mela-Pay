@@ -98,7 +98,7 @@ export default function SignupPage() {
   };
 
   return (
-    <Layout title="Sign Up - Mela Chain">
+    <Layout title="Sign Up - Mela Pay">
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-900 dark:to-gray-800 py-12 px-4">
         <div className="max-w-md w-full">
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8">

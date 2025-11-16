@@ -35,7 +35,7 @@ export default function PaymentPage() {
 
   if (loading) {
     return (
-      <Layout title="Payment - Mela Chain">
+      <Layout title="Payment - Mela Pay">
         <div className="container-custom py-12">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-center justify-center h-64">
@@ -49,7 +49,7 @@ export default function PaymentPage() {
 
   if (error || !payment) {
     return (
-      <Layout title="Payment Not Found - Mela Chain">
+      <Layout title="Payment Not Found - Mela Pay">
         <div className="container-custom py-12">
           <div className="max-w-3xl mx-auto text-center">
             <svg className="w-24 h-24 text-red-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,7 +70,7 @@ export default function PaymentPage() {
   }
 
   return (
-    <Layout title="Complete Payment - Mela Chain">
+    <Layout title="Complete Payment - Mela Pay">
       <div className="container-custom py-12">
         <div className="max-w-3xl mx-auto">
           <div className="mb-8">

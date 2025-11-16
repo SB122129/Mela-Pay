@@ -48,7 +48,7 @@ export default function AdminPage() {
 
   if (loading) {
     return (
-      <Layout title="Admin - Mela Chain">
+      <Layout title="Admin - Mela Pay">
         <div className="container-custom py-12">
           <div className="flex items-center justify-center h-64">
             <div className="spinner"></div>
@@ -60,7 +60,7 @@ export default function AdminPage() {
 
   if (!isAuthenticated || !isAdmin()) {
     return (
-      <Layout title="Admin Login - Mela Chain">
+      <Layout title="Admin Login - Mela Pay">
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-secondary-50 py-12 px-4">
           <div className="max-w-md w-full">
             <div className="bg-white rounded-xl shadow-2xl p-8">
@@ -69,7 +69,7 @@ export default function AdminPage() {
                 <div className="w-16 h-16 bg-gradient-to-br from-primary-600 to-secondary-600 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold text-2xl">M</span>
                 </div>
-                <h1 className="text-3xl font-bold gradient-text mb-2">Mela Chain</h1>
+                <h1 className="text-3xl font-bold gradient-text mb-2">Mela Pay</h1>
                 <p className="text-gray-600">Admin Panel</p>
               </div>
 
@@ -149,7 +149,7 @@ export default function AdminPage() {
   }
 
   return (
-    <Layout title="Admin Dashboard - Mela Chain">
+    <Layout title="Admin Dashboard - Mela Pay">
       <div className="bg-gray-50 min-h-screen">
         {/* Header */}
         <div className="bg-white shadow-sm border-b border-gray-200">

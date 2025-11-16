@@ -57,7 +57,7 @@ export default function MyCoursesPage() {
 
   if (loading) {
     return (
-      <Layout title="My Courses - Mela Chain">
+      <Layout title="My Courses - Mela Pay">
         <div className="container-custom py-12">
           <div className="flex items-center justify-center h-64">
             <div className="spinner"></div>
@@ -68,7 +68,7 @@ export default function MyCoursesPage() {
   }
 
   return (
-    <Layout title="My Courses - Mela Chain">
+    <Layout title="My Courses - Mela Pay">
       <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
         {/* Header */}
         <div className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">

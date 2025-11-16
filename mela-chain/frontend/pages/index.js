@@ -25,7 +25,7 @@ export default function Home() {
   };
 
   return (
-    <Layout title="Mela Chain - Learn Smarter, Pay with Crypto">
+    <Layout title="Mela Pay - Learn Smarter, Pay with Crypto">
       {/* Hero Section */}
       <section className="mela-hero">
         <div className="container-custom">

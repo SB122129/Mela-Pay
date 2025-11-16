@@ -57,7 +57,7 @@ export default function AdminCoursesPage() {
   }
 
   return (
-    <Layout title="Courses - Admin - Mela Chain">
+    <Layout title="Courses - Admin - Mela Pay">
       <div className="bg-gray-50 min-h-screen">
         {/* Header */}
         <div className="bg-white shadow-sm border-b border-gray-200">

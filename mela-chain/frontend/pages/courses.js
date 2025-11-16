@@ -52,7 +52,7 @@ export default function CoursesPage() {
   };
 
   return (
-    <Layout title="Browse Courses - Mela Chain">
+    <Layout title="Browse Courses - Mela Pay">
       <div className="container-custom py-12">
         {/* Header */}
         <div className="mb-8">

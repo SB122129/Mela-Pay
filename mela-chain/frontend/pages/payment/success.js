@@ -31,7 +31,7 @@ export default function PaymentSuccessPage() {
 
   if (loading) {
     return (
-      <Layout title="Payment Success - Mela Chain">
+      <Layout title="Payment Success - Mela Pay">
         <div className="container-custom py-12">
           <div className="flex items-center justify-center h-64">
             <div className="spinner"></div>
@@ -43,7 +43,7 @@ export default function PaymentSuccessPage() {
 
   if (!payment) {
     return (
-      <Layout title="Payment Not Found - Mela Chain">
+      <Layout title="Payment Not Found - Mela Pay">
         <div className="container-custom py-12 text-center">
           <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">Payment Not Found</h1>
           <Link href="/courses">
@@ -57,7 +57,7 @@ export default function PaymentSuccessPage() {
   const isSuccess = ['finished', 'confirmed'].includes(payment.status);
 
   return (
-    <Layout title="Payment Confirmation - Mela Chain">
+    <Layout title="Payment Confirmation - Mela Pay">
       <div className="container-custom py-12">
         <div className="max-w-3xl mx-auto">
           {isSuccess ? (
