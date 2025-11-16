@@ -30,11 +30,11 @@ export default function Home() {
       <section className="mela-hero">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            <h1 className="text-5xl text-gray-900 dark:text-white md:text-6xl font-bold mb-6">
               Learn Smarter, <br />
               <span className="gradient-text">Pay with Crypto</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
               Access world-class EdX courses and pay with Polkadot (DOT). 
               The future of education is here.
             </p>
@@ -54,16 +54,16 @@ export default function Home() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 mt-16">
               <div>
-                <div className="text-4xl font-bold text-primary-600">1000+</div>
-                <div className="text-gray-600 mt-2">Courses Available</div>
+                <div className="text-4xl font-bold text-primary-600 dark:text-primary-400">1000+</div>
+                <div className="text-gray-600 dark:text-gray-300 mt-2">Courses Available</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-secondary-600">Fast</div>
-                <div className="text-gray-600 mt-2">Payment Processing</div>
+                <div className="text-4xl font-bold text-secondary-600 dark:text-secondary-400">Fast</div>
+                <div className="text-gray-600 dark:text-gray-300 mt-2">Payment Processing</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-primary-600">Secure</div>
-                <div className="text-gray-600 mt-2">Blockchain Powered</div>
+                <div className="text-4xl font-bold text-primary-600 dark:text-primary-400">Secure</div>
+                <div className="text-gray-600 dark:text-gray-300 mt-2">Blockchain Powered</div>
               </div>
             </div>
           </div>
@@ -74,8 +74,8 @@ export default function Home() {
       <section className="mela-section">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Featured Courses</h2>
-            <p className="text-xl text-gray-600">
+            <h2 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Featured Courses</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400">
               Top-rated courses from leading universities
             </p>
           </div>
@@ -105,11 +105,11 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="mela-section bg-white">
+      <section id="how-it-works" className="mela-section bg-white dark:bg-gray-800">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">How It Works</h2>
-            <p className="text-xl text-gray-600">
+            <h2 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">How It Works</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400">
               Get started in three simple steps
             </p>
           </div>
@@ -141,8 +141,8 @@ export default function Home() {
       <section className="mela-section">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Why Mela Chain?</h2>
-            <p className="text-xl text-gray-600">
+            <h2 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">Why Mela Chain?</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400">
               The best way to invest in your education
             </p>
           </div>
@@ -196,9 +196,9 @@ function StepCard({ number, title, description, icon }) {
       <div className="w-20 h-20 bg-gradient-to-br from-primary-600 to-secondary-600 rounded-full flex items-center justify-center mx-auto mb-4">
         <span className="text-4xl">{icon}</span>
       </div>
-      <div className="text-primary-600 font-bold text-lg mb-2">Step {number}</div>
-      <h3 className="text-2xl font-bold mb-3">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+      <div className="text-primary-600 dark:text-primary-400 font-bold text-lg mb-2">Step {number}</div>
+      <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">{title}</h3>
+      <p className="text-gray-600 dark:text-gray-300">{description}</p>
     </div>
   );
 }
@@ -207,8 +207,8 @@ function FeatureCard({ icon, title, description }) {
   return (
     <div className="mela-card p-6 text-center">
       <div className="text-5xl mb-4">{icon}</div>
-      <h3 className="text-xl font-bold mb-2">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+      <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{title}</h3>
+      <p className="text-gray-600 dark:text-gray-300">{description}</p>
     </div>
   );
 }
