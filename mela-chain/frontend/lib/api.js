@@ -60,4 +60,12 @@ export const adminAPI = {
   getAnalytics: (params) => api.get('/api/mela/admin/analytics', { params }),
 };
 
+// Auth API
+export const authAPI = {
+  signup: (data) => api.post('/api/auth/signup', data),
+  login: (credentials) => api.post('/api/auth/login', credentials),
+  getProfile: () => api.get('/api/auth/profile'),
+  getPurchasedCourses: () => api.get('/api/auth/courses'),
+};
+
 export default api;

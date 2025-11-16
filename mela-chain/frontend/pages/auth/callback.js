@@ -1,0 +1,46 @@
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Layout from '../../components/layout/Layout';
+
+export default function AuthCallback() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const { token } = router.query;
+
+    if (token) {
+      // Store token
+      localStorage.setItem('token', token);
+
+      // Fetch user data
+      fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/auth/profile`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            localStorage.setItem('user', JSON.stringify(data.data));
+            router.push('/my-courses');
+          } else {
+            router.push('/login');
+          }
+        })
+        .catch(() => {
+          router.push('/login');
+        });
+    }
+  }, [router.query]);
+
+  return (
+    <Layout title="Authenticating...">
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="spinner w-12 h-12 mx-auto mb-4"></div>
+          <p className="text-gray-600">Completing authentication...</p>
+        </div>
+      </div>
+    </Layout>
+  );
+}

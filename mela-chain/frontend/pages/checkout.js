@@ -3,20 +3,28 @@ import { useRouter } from 'next/router';
 import Layout from '../components/layout/Layout';
 import Button from '../components/ui/Button';
 import { useCart } from '../context/CartContext';
+import { usePolkadot } from '../context/PolkadotContext';
+import PolkadotWallet from '../components/mela/PolkadotWallet';
 import { paymentsAPI } from '../lib/api';
 import { formatPrice, formatDOT, isValidEmail } from '../lib/utils';
 
 export default function CheckoutPage() {
   const router = useRouter();
   const { cart, getCartTotal, clearCart } = useCart();
+  const { selectedAccount, isConnected } = usePolkadot();
   const [formData, setFormData] = useState({
     userName: '',
     userEmail: '',
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [walletAddress, setWalletAddress] = useState(null);
 
   const total = getCartTotal();
+
+  const handleAccountSelect = (account) => {
+    setWalletAddress(account.address);
+  };
 
   const validateForm = () => {
     const newErrors = {};
@@ -199,6 +207,11 @@ export default function CheckoutPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
+            {/* Polkadot Wallet */}
+            <div className="mb-6">
+              <PolkadotWallet onAccountSelect={handleAccountSelect} />
+            </div>
+
             <div className="bg-white rounded-xl shadow-md p-6 sticky top-24">
               <h2 className="text-2xl font-bold mb-6">Order Summary</h2>
 

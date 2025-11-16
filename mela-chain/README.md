@@ -12,6 +12,7 @@ Mela Chain is a revolutionary blockchain-powered education platform that enables
 
 ## ✨ Features
 
+### Core Features
 - 🔍 **Browse EdX Courses** - Access thousands of courses from top universities
 - 💎 **Pay with DOT** - Secure payments using Polkadot cryptocurrency
 - 🛒 **Shopping Cart** - Add multiple courses before checkout
@@ -21,6 +22,14 @@ Mela Chain is a revolutionary blockchain-powered education platform that enables
 - 📊 **Analytics** - Payment and course statistics
 - 🔒 **Secure** - Blockchain-powered security
 
+### New Features ✨
+- 🔐 **User Authentication** - Email/password and Google OAuth signup/login
+- 👛 **Polkadot Wallet Integration** - Connect Polkadot.js extension for payments
+- 📚 **My Courses Dashboard** - View and access all purchased courses
+- 📧 **Email Notifications** - Welcome emails and payment confirmations
+- 🎯 **User Profiles** - Track purchase history and course access
+- 🔑 **Admin Account** - Pre-configured admin access
+
 ## 🏗️ Tech Stack
 
 ### Backend
@@ -29,12 +38,16 @@ Mela Chain is a revolutionary blockchain-powered education platform that enables
 - **NowPayments API** for crypto payments
 - **EdX API** for course data
 - **JWT** for authentication
+- **Passport.js** with Google OAuth
+- **Nodemailer** for email service
 - **Axios** for HTTP requests
 
 ### Frontend
 - **Next.js 13** with React
 - **Tailwind CSS** for styling
 - **React Query** for data fetching
+- **Polkadot.js Extension** integration
+- **@polkadot/api** for blockchain interaction
 - **QR Code** generation
 - **Context API** for state management
 
@@ -92,19 +105,36 @@ The frontend will run on `http://localhost:3000`
 
 ## 🚀 Quick Start
 
+### Option 1: Quick Start (5 Minutes)
+See **[QUICK_START.md](./QUICK_START.md)** for the fastest setup.
+
+### Option 2: Full Setup
+
 1. **Start MongoDB** (if running locally)
-2. **Start Backend Server**:
+2. **Configure Backend**:
    ```bash
-   cd backend && npm run dev
+   cd backend
+   cp .env.template .env
+   # Edit .env with your credentials
+   npm install
+   npm run create-admin  # Creates admin account
+   npm run dev
    ```
-3. **Start Frontend Server**:
+3. **Configure Frontend**:
    ```bash
-   cd frontend && npm run dev
+   cd frontend
+   npm install
+   echo "NEXT_PUBLIC_API_URL=http://localhost:5000" > .env.local
+   npm run dev
    ```
-4. **Access the Application**: Open `http://localhost:3000`
-5. **Admin Login**: Use credentials from seed script
-   - Email: `admin@melachain.com`
-   - Password: `admin123`
+4. **Access the Application**: 
+   - Frontend: `http://localhost:3000`
+   - Backend API: `http://localhost:5000`
+   - Admin Panel: `http://localhost:3000/admin`
+
+5. **Login Credentials**:
+   - **Admin**: melapay12@gmail.com / 1122127
+   - **Create User Account**: Visit `/signup`
 
 ## 📚 API Endpoints
 
@@ -121,6 +151,18 @@ The frontend will run on `http://localhost:3000`
 - `GET /api/mela/payments/:id` - Get payment status
 - `POST /api/mela/payments/webhook` - NowPayments webhook
 - `POST /api/mela/payments/:id/simulate` - Simulate payment (dev only)
+
+### User Authentication Endpoints
+
+#### Public
+- `POST /api/auth/signup` - User registration
+- `POST /api/auth/login` - User login
+- `GET /api/auth/google` - Initiate Google OAuth
+- `GET /api/auth/google/callback` - Google OAuth callback
+
+#### Protected (Requires JWT Token)
+- `GET /api/auth/profile` - Get user profile
+- `GET /api/auth/courses` - Get purchased courses
 
 ### Admin Endpoints (Requires Authentication)
 
@@ -298,13 +340,74 @@ For support, email support@melachain.com or open an issue on GitHub.
 
 ## 🗺️ Roadmap
 
+### Completed ✅
+- [x] User accounts and authentication
+- [x] Course purchase history
+- [x] Email notifications
+- [x] Google OAuth integration
+- [x] Polkadot wallet integration
+- [x] My Courses dashboard
+
+### Planned 🚧
 - [ ] Multi-currency support (BTC, ETH, etc.)
-- [ ] User accounts and course history
 - [ ] Course recommendations
 - [ ] Mobile app (React Native)
 - [ ] Course reviews and ratings
 - [ ] Referral program
 - [ ] Subscription plans
+- [ ] Email verification
+- [ ] Password reset
+- [ ] Two-factor authentication
+
+## 📖 Documentation
+
+- **[Quick Start Guide](./QUICK_START.md)** - Get started in 5 minutes
+- **[Authentication Setup](./AUTHENTICATION_SETUP.md)** - Complete auth configuration
+- **[Implementation Summary](./IMPLEMENTATION_SUMMARY.md)** - Feature overview
+- **[Setup Guide](./SETUP_GUIDE.md)** - Detailed setup instructions
+
+## 🎯 Key Features Explained
+
+### User Authentication
+Users can sign up and log in using:
+- Traditional email/password
+- Google OAuth (one-click signup)
+
+After authentication, users can:
+- View purchased courses at `/my-courses`
+- Track payment history
+- Access course materials directly
+
+### Polkadot Wallet Integration
+The platform integrates with Polkadot.js browser extension:
+- Connect wallet on checkout
+- View DOT balance
+- Select payment account
+- Secure blockchain transactions
+
+### Email Notifications
+Automated emails for:
+- Welcome message on signup
+- Payment pending notification
+- Payment confirmation
+- Course access details
+
+### Admin Panel
+Comprehensive dashboard for:
+- Managing courses
+- Viewing all payments
+- Analytics and statistics
+- User management
+
+## 🔐 Security Features
+
+- Password hashing with bcrypt
+- JWT token authentication
+- Protected API routes
+- CORS configuration
+- Input validation
+- Session security
+- Secure cookie handling
 - [ ] Live course streaming
 
 ## 📸 Screenshots
