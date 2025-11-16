@@ -33,7 +33,7 @@ export default function AuthCallback() {
             } else if (data.data.role === 'admin') {
               router.push('/admin');
             } else {
-              router.push('/my-courses');
+              router.push('/');
             }
           } else {
             router.push('/login');
