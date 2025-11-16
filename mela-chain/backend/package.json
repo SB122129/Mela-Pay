@@ -10,22 +10,28 @@
     "seed": "node scripts/seed.js",
     "create-admin": "node scripts/createAdmin.js"
   },
-  "keywords": ["blockchain", "education", "polkadot", "edx", "cryptocurrency"],
+  "keywords": [
+    "blockchain",
+    "education",
+    "polkadot",
+    "edx",
+    "cryptocurrency"
+  ],
   "author": "Mela Chain",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2",
-    "mongoose": "^7.5.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
     "axios": "^1.5.0",
     "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^9.0.2",
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-session": "^1.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.5.0",
     "nodemailer": "^6.9.7",
     "passport": "^0.6.0",
-    "passport-google-oauth20": "^2.0.0",
-    "express-session": "^1.17.3"
+    "passport-google-oauth20": "^2.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

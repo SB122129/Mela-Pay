@@ -9,16 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@polkadot/api": "^10.13.1",
+    "@polkadot/extension-dapp": "^0.46.9",
+    "@polkadot/util": "^12.5.1",
+    "@polkadot/util-crypto": "^12.5.1",
+    "axios": "^1.5.0",
     "next": "13.5.2",
+    "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "axios": "^1.5.0",
-    "react-query": "^3.39.3",
-    "qrcode.react": "^3.1.0",
-    "@polkadot/extension-dapp": "^0.46.6",
-    "@polkadot/api": "^10.9.1",
-    "@polkadot/util": "^12.5.1",
-    "@polkadot/util-crypto": "^12.5.1"
+    "react-query": "^3.39.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.15",
