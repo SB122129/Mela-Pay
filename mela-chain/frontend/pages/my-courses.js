@@ -82,9 +82,6 @@ export default function MyCoursesPage() {
                 <Button variant="outline" onClick={() => router.push('/courses')}>
                   Browse Courses
                 </Button>
-                <Button variant="outline" onClick={handleLogout}>
-                  Logout
-                </Button>
               </div>
             </div>
           </div>
