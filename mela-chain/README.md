@@ -1,4 +1,4 @@
-# 🎓 Mela Chain - Blockchain Education Platform
+# 🎓 Mela PAY - Blockchain Education Platform
 
 > **Learn Smarter, Pay with Crypto**
 
@@ -185,43 +185,13 @@ See **[QUICK_START.md](./QUICK_START.md)** for the fastest setup.
 
 ## 🔧 Configuration
 
-### Environment Variables
 
-#### Backend (.env)
-```env
-# Database
-MONGODB_URI=mongodb://localhost:27017/mela-chain
-
-# NowPayments
-NOWPAYMENTS_API_KEY=your_api_key
-NOWPAYMENTS_IPN_SECRET=your_ipn_secret
-
-# JWT
-JWT_SECRET=your_jwt_secret
-
-# URLs
-CLIENT_URL=http://localhost:3000
-BASE_URL=http://localhost:5000
-
-# EdX API
-EDX_API_BASE=https://api.edx.org/catalog/v1
-
-# Server
-PORT=5000
-NODE_ENV=development
 ```
 
 #### Frontend (.env)
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000
 ```
-
-## 🎨 Design System
-
-### Colors
-- **Primary**: `#7C3AED` (Purple)
-- **Secondary**: `#059669` (Emerald Green)
-- **Accent**: `#F59E0B` (Amber)
 
 ### Typography
 - **Font Family**: Inter (Google Fonts)
@@ -234,7 +204,6 @@ NEXT_PUBLIC_API_URL=http://localhost:5000
 - **Course Catalog**: Browse and search thousands of courses
 - **Shopping Cart**: Add multiple courses before checkout
 - **Crypto Payment**: Pay securely with Polkadot (DOT)
-- **QR Codes**: Easy mobile wallet scanning
 - **Real-time Updates**: Live payment status tracking
 - **Email Notifications**: Confirmation and access emails
 
@@ -334,9 +303,9 @@ MIT License - feel free to use this project for learning or commercial purposes.
 - **Next.js** - React framework
 - **Tailwind CSS** - Styling framework
 
-## 📞 Support
+## Support
 
-For support, email support@melachain.com or open an issue on GitHub.
+For support, email yeabsiragenet48@gmail.com , samiberhanu12@gmail.com or open an issue on GitHub.
 
 ## 🗺️ Roadmap
 
@@ -426,6 +395,6 @@ Comprehensive analytics and management tools.
 
 ---
 
-**Made with ❤️ by the Mela Chain Team**
+**Made with ❤️ by the Mela Cpay Team**
 
 *Learn Smarter, Pay with Crypto* 🎓💎
