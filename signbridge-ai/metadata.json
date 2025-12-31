@@ -1,0 +1,8 @@
+{
+  "name": "SignBridge AI",
+  "description": "An advanced accessibility tool that interprets sign language via camera in real-time and converts it into high-fidelity speech using Gemini AI.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
